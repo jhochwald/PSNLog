@@ -1,6 +1,6 @@
 function New-NLogFileTarget
 {
-   <#
+	<#
          .SYNOPSIS
          Creates a new NLog file logging target.
 
@@ -114,94 +114,97 @@ function New-NLogFileTarget
          License: BSD 3-Clause "New" or "Revised" License
 
          .LINK
+         https://github.com/jhochwald/PSNLog
+
+         .LINK
          https://github.com/MaikKoster/PSNLog
    #>
-   [CmdletBinding(DefaultParameterSetName = 'ByTypeName',
-   ConfirmImpact = 'None')]
-   [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseShouldProcessForStateChangingFunctions', '')]
-   [OutputType([NLog.Targets.FileTarget])]
-   param
-   (
-      [Parameter(Position = 0)]
-      [string]
-      $Name,
-      [Parameter(Position = 1)]
-      [string]
-      $FileName,
-      [string]
-      $Layout,
-      [string]
-      $ArchiveFileName,
-      [ValidateSet('Rolling', 'Sequence', 'Date', 'DateAndSequence')]
-      [string]
-      $ArchiveNumbering,
-      [string]
-      $ArchiveDateFormat,
-      [ValidateSet('Day', 'Hour', 'Minute', 'Month', 'None', 'Year', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday')]
-      [string]
-      $ArchiveEvery,
-      [int]
-      $MaxArchiveFiles = 0,
-      [switch]
-      $EnableArchiveFileCompression
-   )
+	[CmdletBinding(DefaultParameterSetName = 'ByTypeName',
+		ConfirmImpact = 'None')]
+	[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseShouldProcessForStateChangingFunctions', '')]
+	[OutputType([NLog.Targets.FileTarget])]
+	param
+	(
+		[Parameter(Position = 0)]
+		[string]
+		$Name,
+		[Parameter(Position = 1)]
+		[string]
+		$FileName,
+		[string]
+		$Layout,
+		[string]
+		$ArchiveFileName,
+		[ValidateSet('Rolling', 'Sequence', 'Date', 'DateAndSequence')]
+		[string]
+		$ArchiveNumbering,
+		[string]
+		$ArchiveDateFormat,
+		[ValidateSet('Day', 'Hour', 'Minute', 'Month', 'None', 'Year', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday')]
+		[string]
+		$ArchiveEvery,
+		[int]
+		$MaxArchiveFiles = 0,
+		[switch]
+		$EnableArchiveFileCompression
+	)
 
-   process
-   {
-      $FileTarget = (New-NLogTarget -Name $Name -FileTarget)
+	process
+ {
+		$FileTarget = (New-NLogTarget -Name $Name -FileTarget)
 
-      if ([string]::IsNullOrEmpty($FileName))
-      {
-         $ScriptName = (Get-PSCallStack | Select-Object -Last 1 -ExpandProperty 'ScriptName')
+		if ([string]::IsNullOrEmpty($FileName))
+		{
+			$ScriptName = (Get-PSCallStack | Select-Object -Last 1 -ExpandProperty 'ScriptName')
 
-         if ([string]::IsNullOrEmpty($ScriptName))
-         {
-            # Default to module name if no further information is supplied.
-            $ScriptName = 'PSNlog.log'
-         }
-         else
-         {
-            $ScriptName = ((Split-Path -Path $ScriptName -Leaf) -replace '.ps1|.psm1', '.log')
-         }
+			if ([string]::IsNullOrEmpty($ScriptName))
+			{
+				# Default to module name if no further information is supplied.
+				$ScriptName = 'PSNlog.log'
+			}
+			else
+			{
+				$ScriptName = ((Split-Path -Path $ScriptName -Leaf) -replace '.ps1|.psm1', '.log')
+			}
 
-         $FileTarget.FileName = ($Env:Temp + '\' + $ScriptName)
-      }
-      else
-      {
-         $FileTarget.FileName = $FileName
-      }
+			$FileTarget.FileName = ($Env:Temp + '\' + $ScriptName)
+		}
+		else
+		{
+			$FileTarget.FileName = $FileName
+		}
 
-      if (-Not ([string]::IsNullOrEmpty($Layout)))
-      {
-         $FileTarget.Layout = $Layout
-      }
+		if (-Not ([string]::IsNullOrEmpty($Layout)))
+		{
+			$FileTarget.Layout = $Layout
+		}
 
-      # Archive settings
-      if (-Not ([string]::IsNullOrEmpty($ArchiveFileName)))
-      {
-         $FileTarget.ArchiveFileName = $ArchiveFileName
-         $FileTarget.MaxArchiveFiles = $MaxArchiveFiles
-         $FileTarget.EnableArchiveFileCompression = $EnableArchiveFileCompression.IsPresent
+		# Archive settings
+		if (-Not ([string]::IsNullOrEmpty($ArchiveFileName)))
+		{
+			$FileTarget.ArchiveFileName = $ArchiveFileName
+			$FileTarget.MaxArchiveFiles = $MaxArchiveFiles
+			$FileTarget.EnableArchiveFileCompression = $EnableArchiveFileCompression.IsPresent
 
-         if (-Not ([string]::IsNullOrEmpty($ArchiveNumbering)))
-         {
-            $FileTarget.ArchiveNumbering = $ArchiveNumbering
+			if (-Not ([string]::IsNullOrEmpty($ArchiveNumbering)))
+			{
+				$FileTarget.ArchiveNumbering = $ArchiveNumbering
 
-            if (($ArchiveNumbering -eq 'Date') -or ($ArchiveNumbering -eq 'DateAndSequence'))
-            {
-               if (-Not ([string]::IsNullOrEmpty($ArchiveDateFormat)))
-               {
-                  $FileTarget.ArchiveDateFormat = $ArchiveDateFormat
-               }
-            }
-         }
+				if (($ArchiveNumbering -eq 'Date') -or ($ArchiveNumbering -eq 'DateAndSequence'))
+				{
+					if (-Not ([string]::IsNullOrEmpty($ArchiveDateFormat)))
+					{
+						$FileTarget.ArchiveDateFormat = $ArchiveDateFormat
+					}
+				}
+			}
 
-         if (-Not ([string]::IsNullOrEmpty($ArchiveEvery)))
-         {
-            $FileTarget.ArchiveEvery = $ArchiveEvery
-         }
-      }
+			if (-Not ([string]::IsNullOrEmpty($ArchiveEvery)))
+			{
+				$FileTarget.ArchiveEvery = $ArchiveEvery
+			}
+		}
 
-      $FileTarget
-   }
+		$FileTarget
+	}
 }

@@ -1,6 +1,6 @@
 function Get-NLogLogger
 {
-   <#
+	<#
          .SYNOPSIS
          Gets a NLog Logger instance
 
@@ -28,19 +28,22 @@ function Get-NLogLogger
          License: BSD 3-Clause "New" or "Revised" License
 
          .LINK
+         https://github.com/jhochwald/PSNLog
+
+         .LINK
          https://github.com/MaikKoster/PSNLog
    #>
-   [CmdletBinding(ConfirmImpact = 'None')]
-   [OutputType([NLog.Logger])]
-   param
-   (
-      [Parameter(Position = 0)]
-      [string]
-      $LoggerName = (Get-PSCallStack)[1].Command
-   )
+	[CmdletBinding(ConfirmImpact = 'None')]
+	[OutputType([NLog.Logger])]
+	param
+	(
+		[Parameter(Position = 0)]
+		[string]
+		$LoggerName = (Get-PSCallStack)[1].Command
+	)
 
-   process
-   {
-      [NLog.LogManager]::GetLogger($LoggerName)
-   }
+	process
+ {
+		[NLog.LogManager]::GetLogger($LoggerName)
+	}
 }

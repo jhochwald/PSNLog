@@ -57,6 +57,9 @@ function Enable-NLogLogging
          License: BSD 3-Clause "New" or "Revised" License
 
          .LINK
+         https://github.com/jhochwald/PSNLog
+
+         .LINK
          https://github.com/MaikKoster/PSNLog
    #>
 	[CmdletBinding(DefaultParameterSetName = 'ByFilename',
@@ -87,7 +90,7 @@ function Enable-NLogLogging
 	)
 
 	process
- {
+	{
 		if ($PSCmdlet.ParameterSetName -eq 'ByTarget')
 		{
 			if ([string]::IsNullOrEmpty($MinimumLevel))

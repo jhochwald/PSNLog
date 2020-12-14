@@ -1,6 +1,6 @@
 function Write-NLogHost
 {
-   <#
+	<#
          .SYNOPSIS
          Writes a message on 'Info' log level and to the Host.
 
@@ -62,49 +62,52 @@ function Write-NLogHost
          License: BSD 3-Clause "New" or "Revised" License
 
          .LINK
+         https://github.com/jhochwald/PSNLog
+
+         .LINK
          https://github.com/MaikKoster/PSNLog
    #>
 
-   [CmdletBinding(ConfirmImpact = 'None')]
-   param
-   (
-      [Parameter(ValueFromPipeline,
-            ValueFromPipelineByPropertyName,
-      Position = 0)]
-      [object]
-      $Object,
-      [Parameter(ValueFromPipeline,
-      ValueFromPipelineByPropertyName)]
-      [switch]
-      $NoNewline,
-      [Parameter(ValueFromPipeline,
-      ValueFromPipelineByPropertyName)]
-      [object]
-      $Separator,
-      [Parameter(ValueFromPipeline,
-      ValueFromPipelineByPropertyName)]
-      [ConsoleColor]
-      $ForegroundColor,
-      [Parameter(ValueFromPipeline,
-      ValueFromPipelineByPropertyName)]
-      [ConsoleColor]
-      $BackgroundColor
-   )
+	[CmdletBinding(ConfirmImpact = 'None')]
+	param
+	(
+		[Parameter(ValueFromPipeline,
+			ValueFromPipelineByPropertyName,
+			Position = 0)]
+		[object]
+		$Object,
+		[Parameter(ValueFromPipeline,
+			ValueFromPipelineByPropertyName)]
+		[switch]
+		$NoNewline,
+		[Parameter(ValueFromPipeline,
+			ValueFromPipelineByPropertyName)]
+		[object]
+		$Separator,
+		[Parameter(ValueFromPipeline,
+			ValueFromPipelineByPropertyName)]
+		[ConsoleColor]
+		$ForegroundColor,
+		[Parameter(ValueFromPipeline,
+			ValueFromPipelineByPropertyName)]
+		[ConsoleColor]
+		$BackgroundColor
+	)
 
-   begin
-   {
-      $Logger = (Get-NLogLogger)
-   }
+	begin
+ {
+		$Logger = (Get-NLogLogger)
+	}
 
-   process
-   {
-      # Write to Log if possible
-      if ($null -ne $Logger)
-      {
-         $Logger.Info($Object.ToString())
-      }
+	process
+ {
+		# Write to Log if possible
+		if ($null -ne $Logger)
+		{
+			$Logger.Info($Object.ToString())
+		}
 
-      # Write to original Message Stream
-      Microsoft.PowerShell.Utility\Write-Host @PSBoundParameters
-   }
+		# Write to original Message Stream
+		Microsoft.PowerShell.Utility\Write-Host @PSBoundParameters
+	}
 }

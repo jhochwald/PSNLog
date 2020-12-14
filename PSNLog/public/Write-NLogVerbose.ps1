@@ -1,6 +1,6 @@
 function Write-NLogVerbose
 {
-   <#
+	<#
          .SYNOPSIS
          Writes a message on 'Debug' log level and to the Verbose Message stream.
 
@@ -18,40 +18,43 @@ function Write-NLogVerbose
          License: BSD 3-Clause "New" or "Revised" License
 
          .LINK
+         https://github.com/jhochwald/PSNLog
+
+         .LINK
          https://github.com/MaikKoster/PSNLog
 
          .LINK
          Write-Verbose
    #>
 
-   [CmdletBinding(ConfirmImpact = 'None')]
-   param
-   (
-      [Parameter(Mandatory,
-            ValueFromPipeline,
-            ValueFromPipelineByPropertyName,
-            Position = 0,
-      HelpMessage = 'Specifies the message to display.')]
-      [AllowEmptyString()]
-      [Alias('Msg')]
-      [string]
-      $Message
-   )
+	[CmdletBinding(ConfirmImpact = 'None')]
+	param
+	(
+		[Parameter(Mandatory,
+			ValueFromPipeline,
+			ValueFromPipelineByPropertyName,
+			Position = 0,
+			HelpMessage = 'Specifies the message to display.')]
+		[AllowEmptyString()]
+		[Alias('Msg')]
+		[string]
+		$Message
+	)
 
-   begin
-   {
-      $Logger = (Get-NLogLogger)
-   }
+	begin
+ {
+		$Logger = (Get-NLogLogger)
+	}
 
-   process
-   {
-      # Write to Log if possible
-      if ($null -ne $Logger)
-      {
-         $Logger.Debug($Message)
-      }
+	process
+ {
+		# Write to Log if possible
+		if ($null -ne $Logger)
+		{
+			$Logger.Debug($Message)
+		}
 
-      # Write to original Message Stream
-      Microsoft.PowerShell.Utility\Write-Verbose @PSBoundParameters
-   }
+		# Write to original Message Stream
+		Microsoft.PowerShell.Utility\Write-Verbose @PSBoundParameters
+	}
 }

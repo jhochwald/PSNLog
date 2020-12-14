@@ -1,6 +1,6 @@
 function Set-ScriptRoot
 {
-   <#
+	<#
          .SYNOPSIS
          Sets the 'scriptroot' variable.
 
@@ -15,29 +15,34 @@ function Set-ScriptRoot
          License: BSD 3-Clause "New" or "Revised" License
 
          .LINK
+         https://github.com/jhochwald/PSNLog
+
+         .LINK
          https://github.com/MaikKoster/PSNLog
    #>
-   [CmdletBinding(ConfirmImpact = 'None')]
-   [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseSingularNouns', '')]
-   [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseShouldProcessForStateChangingFunctions', '')]
-   [CmdLetBinding()]
-   param()
+	[CmdletBinding(ConfirmImpact = 'None')]
+	[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseSingularNouns', '')]
+	[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseShouldProcessForStateChangingFunctions', '')]
+	[CmdLetBinding()]
+	param()
 
-   process {
-      if (-not ([NLog.LogManager]::Configuration))
-      {
-         [NLog.LogManager]::Configuration = (New-Object -TypeName NLog.Config.LoggingConfiguration)
-      }
+	process
+ {
+		if (-not ([NLog.LogManager]::Configuration))
+		{
+			[NLog.LogManager]::Configuration = (New-Object -TypeName NLog.Config.LoggingConfiguration)
+		}
 
-      $ScriptName = (Get-PSCallStack | Select-Object -Last 1 -ExpandProperty 'ScriptName')
+		$ScriptName = (Get-PSCallStack | Select-Object -Last 1 -ExpandProperty 'ScriptName')
 
-      if ([string]::IsNullOrEmpty($ScriptName)) 
-      {
-         $ScriptLocation = ((Get-Location).ToString())
-      } else 
-      {
-         $ScriptLocation = (Split-Path -Path $ScriptName -Parent)
-      }
-      [NLog.LogManager]::Configuration.Variables['scriptroot'] = $ScriptLocation
-   }
+		if ([string]::IsNullOrEmpty($ScriptName))
+		{
+			$ScriptLocation = ((Get-Location).ToString())
+		}
+		else
+		{
+			$ScriptLocation = (Split-Path -Path $ScriptName -Parent)
+		}
+		[NLog.LogManager]::Configuration.Variables['scriptroot'] = $ScriptLocation
+	}
 }

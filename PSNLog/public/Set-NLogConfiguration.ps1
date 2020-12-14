@@ -1,6 +1,6 @@
 function Set-NLogConfiguration
 {
-   <#
+	<#
          .SYNOPSIS
          Sets the NLog logging configuration.
 
@@ -22,26 +22,29 @@ function Set-NLogConfiguration
          License: BSD 3-Clause "New" or "Revised" License
 
          .LINK
+         https://github.com/jhochwald/PSNLog
+
+         .LINK
          https://github.com/MaikKoster/PSNLog
    #>
-   [CmdletBinding(ConfirmImpact = 'None')]
-   [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseShouldProcessForStateChangingFunctions', '')]
-   [OutputType([NLog.Config.LoggingConfiguration])]
-   param
-   (
-      [Parameter(Mandatory,
-            ValueFromPipeline,
-            ValueFromPipelineByPropertyName,
-            Position = 0,
-      HelpMessage = 'Specifies the NLog configuration')]
-      [ValidateNotNullOrEmpty()]
-      [NLog.Config.LoggingConfiguration]
-      $Configuration
-   )
+	[CmdletBinding(ConfirmImpact = 'None')]
+	[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseShouldProcessForStateChangingFunctions', '')]
+	[OutputType([NLog.Config.LoggingConfiguration])]
+	param
+	(
+		[Parameter(Mandatory,
+			ValueFromPipeline,
+			ValueFromPipelineByPropertyName,
+			Position = 0,
+			HelpMessage = 'Specifies the NLog configuration')]
+		[ValidateNotNullOrEmpty()]
+		[NLog.Config.LoggingConfiguration]
+		$Configuration
+	)
 
-   process
-   {
-      [NLog.LogManager]::Configuration = $Configuration
-      Set-ScriptRoot
-   }
+	process
+ {
+		[NLog.LogManager]::Configuration = $Configuration
+		Set-ScriptRoot
+	}
 }

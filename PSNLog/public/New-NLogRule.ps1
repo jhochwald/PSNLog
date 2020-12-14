@@ -1,6 +1,6 @@
 function New-NLogRule
 {
-   <#
+	<#
          .SYNOPSIS
          Creates a new NLog logging rule.
 
@@ -40,86 +40,89 @@ function New-NLogRule
          License: BSD 3-Clause "New" or "Revised" License
 
          .LINK
+         https://github.com/jhochwald/PSNLog
+
+         .LINK
          https://github.com/MaikKoster/PSNLog
    #>
-   [CmdletBinding(DefaultParameterSetName = 'MinLevel',
-   ConfirmImpact = 'None')]
-   [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseShouldProcessForStateChangingFunctions', '')]
-   [OutputType([NLog.Config.LoggingRule])]
-   param
-   (
-      [Parameter(ParameterSetName = 'DisabledRule',
-            ValueFromPipeline,
-      ValueFromPipelineByPropertyName)]
-      [Parameter(ParameterSetName = 'MinLevel')]
-      [Parameter(ParameterSetName = 'MinMaxLevel')]
-      [string]
-      $LoggerNamePattern = '*',
-      [Parameter(ParameterSetName = 'DisabledRule',
-            Mandatory,
-            ValueFromPipeline,
-            ValueFromPipelineByPropertyName,
-      HelpMessage = 'Specifies if the rule should be disabled by default.')]
-      [switch]
-      $Disabled,
-      [Parameter(ParameterSetName = 'MinLevel',
-            Mandatory,
-            ValueFromPipeline,
-            ValueFromPipelineByPropertyName,
-      HelpMessage = 'Specifies the minimum log level needed to trigger this rule.')]
-      [Parameter(ParameterSetName = 'MinMaxLevel',
-      Mandatory)]
-      [ValidateSet('Debug', 'Error', 'Fatal', 'Info', 'Off', 'Trace', 'Warn')]
-      [ValidateNotNullOrEmpty()]
-      [Alias('MinLevel')]
-      [string]
-      $MinimumLevel,
-      [Parameter(ParameterSetName = 'MinMaxLevel',
-            Mandatory,
-            ValueFromPipeline,
-            ValueFromPipelineByPropertyName,
-      HelpMessage = 'Specifies the maximum log level needed to trigger this rule.')]
-      [ValidateSet('Debug', 'Error', 'Fatal', 'Info', 'Off', 'Trace', 'Warn')]
-      [ValidateNotNullOrEmpty()]
-      [Alias('MaxLevel')]
-      [string]
-      $MaximumLevel,
-      [Parameter(ParameterSetName = 'DisabledRule',
-            Mandatory,
-            ValueFromPipeline,
-            ValueFromPipelineByPropertyName,
-      HelpMessage = 'Specifies the target to be written to when the rule matches.')]
-      [Parameter(ParameterSetName = 'MinLevel',
-      Mandatory)]
-      [Parameter(ParameterSetName = 'MinMaxLevel',
-      Mandatory)]
-      [ValidateNotNullOrEmpty()]
-      [NLog.Targets.Target]
-      $Target
-   )
+	[CmdletBinding(DefaultParameterSetName = 'MinLevel',
+		ConfirmImpact = 'None')]
+	[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseShouldProcessForStateChangingFunctions', '')]
+	[OutputType([NLog.Config.LoggingRule])]
+	param
+	(
+		[Parameter(ParameterSetName = 'DisabledRule',
+			ValueFromPipeline,
+			ValueFromPipelineByPropertyName)]
+		[Parameter(ParameterSetName = 'MinLevel')]
+		[Parameter(ParameterSetName = 'MinMaxLevel')]
+		[string]
+		$LoggerNamePattern = '*',
+		[Parameter(ParameterSetName = 'DisabledRule',
+			Mandatory,
+			ValueFromPipeline,
+			ValueFromPipelineByPropertyName,
+			HelpMessage = 'Specifies if the rule should be disabled by default.')]
+		[switch]
+		$Disabled,
+		[Parameter(ParameterSetName = 'MinLevel',
+			Mandatory,
+			ValueFromPipeline,
+			ValueFromPipelineByPropertyName,
+			HelpMessage = 'Specifies the minimum log level needed to trigger this rule.')]
+		[Parameter(ParameterSetName = 'MinMaxLevel',
+			Mandatory)]
+		[ValidateSet('Debug', 'Error', 'Fatal', 'Info', 'Off', 'Trace', 'Warn')]
+		[ValidateNotNullOrEmpty()]
+		[Alias('MinLevel')]
+		[string]
+		$MinimumLevel,
+		[Parameter(ParameterSetName = 'MinMaxLevel',
+			Mandatory,
+			ValueFromPipeline,
+			ValueFromPipelineByPropertyName,
+			HelpMessage = 'Specifies the maximum log level needed to trigger this rule.')]
+		[ValidateSet('Debug', 'Error', 'Fatal', 'Info', 'Off', 'Trace', 'Warn')]
+		[ValidateNotNullOrEmpty()]
+		[Alias('MaxLevel')]
+		[string]
+		$MaximumLevel,
+		[Parameter(ParameterSetName = 'DisabledRule',
+			Mandatory,
+			ValueFromPipeline,
+			ValueFromPipelineByPropertyName,
+			HelpMessage = 'Specifies the target to be written to when the rule matches.')]
+		[Parameter(ParameterSetName = 'MinLevel',
+			Mandatory)]
+		[Parameter(ParameterSetName = 'MinMaxLevel',
+			Mandatory)]
+		[ValidateNotNullOrEmpty()]
+		[NLog.Targets.Target]
+		$Target
+	)
 
-   process
-   {
-      switch ($PSCmdlet.ParameterSetName)
-      {
-         'DisabledRule'
-         {
-            (New-Object -TypeName NLog.Config.LoggingRule -ArgumentList ($LoggerNamePattern, $Target))
+	process
+ {
+		switch ($PSCmdlet.ParameterSetName)
+		{
+			'DisabledRule'
+			{
+				(New-Object -TypeName NLog.Config.LoggingRule -ArgumentList ($LoggerNamePattern, $Target))
 
-            break
-         }
-         'MinLevel'
-         {
-            (New-Object -TypeName NLog.Config.LoggingRule -ArgumentList ($LoggerNamePattern, [NLog.LogLevel]::FromString($MinimumLevel), $Target))
+				break
+			}
+			'MinLevel'
+			{
+				(New-Object -TypeName NLog.Config.LoggingRule -ArgumentList ($LoggerNamePattern, [NLog.LogLevel]::FromString($MinimumLevel), $Target))
 
-            break
-         }
-         'MinMaxLevel'
-         {
-            (New-Object -TypeName NLog.Config.LoggingRule -ArgumentList ($LoggerNamePattern, [NLog.LogLevel]::FromString($MinimumLevel), [NLog.LogLevel]::FromString($MaximumLevel), $Target))
+				break
+			}
+			'MinMaxLevel'
+			{
+				(New-Object -TypeName NLog.Config.LoggingRule -ArgumentList ($LoggerNamePattern, [NLog.LogLevel]::FromString($MinimumLevel), [NLog.LogLevel]::FromString($MaximumLevel), $Target))
 
-            break
-         }
-      }
-   }
+				break
+			}
+		}
+	}
 }

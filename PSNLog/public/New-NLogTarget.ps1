@@ -76,6 +76,9 @@ The original is part of PSNLog, a Wrapper for NLog to easily use NLog logging ca
 License: BSD 3-Clause "New" or "Revised" License
 
 .LINK
+https://github.com/jhochwald/PSNLog
+
+.LINK
 https://github.com/MaikKoster/PSNLog
 #>
 
@@ -244,19 +247,19 @@ https://github.com/MaikKoster/PSNLog
 			}
 		}
 
-      if ($null -ne $Target)
-      {
-         if ([string]::IsNullOrEmpty($Name))
-         {
-            # Generate random string
-            $Name = -join ((65 .. 90) | Get-Random -Count 6 | ForEach-Object -Process {
-                  [char]$_
-               })
-         }
+		if ($null -ne $Target)
+		{
+			if ([string]::IsNullOrEmpty($Name))
+			{
+				# Generate random string
+				$Name = -join ((65 .. 90) | Get-Random -Count 6 | ForEach-Object -Process {
+						[char]$_
+					})
+			}
 
-         $Target.Name = $Name
+			$Target.Name = $Name
 
-         $Target
-      }
+			$Target
+		}
 	}
 }

@@ -1,6 +1,6 @@
 ﻿function Write-NLogInfo
 {
-   <#
+	<#
          .SYNOPSIS
          Writes a message on 'Info' log level and to the Info Message stream.
 
@@ -21,42 +21,45 @@
          Inspired by PSNLog, a Wrapper for NLog to easily use NLog logging capabilities in PowerShell, by Maik Koster
 
          .LINK
+         https://github.com/jhochwald/PSNLog
+
+         .LINK
          Write-Information
    #>
 
-   [CmdletBinding(ConfirmImpact = 'None')]
-   param
-   (
-      [Parameter(Mandatory,
-            ValueFromPipeline,
-            ValueFromPipelineByPropertyName,
-            Position = 0,
-      HelpMessage = 'Specifies an informational message that you want to display to users as they run a script or command.')]
-      [AllowEmptyString()]
-      [Alias('Msg', 'Message')]
-      [object]
-      $MessageData,
-      [Parameter(ValueFromPipeline,
-            ValueFromPipelineByPropertyName,
-      Position = 1)]
-      [string]
-      $Tags
-   )
+	[CmdletBinding(ConfirmImpact = 'None')]
+	param
+	(
+		[Parameter(Mandatory,
+			ValueFromPipeline,
+			ValueFromPipelineByPropertyName,
+			Position = 0,
+			HelpMessage = 'Specifies an informational message that you want to display to users as they run a script or command.')]
+		[AllowEmptyString()]
+		[Alias('Msg', 'Message')]
+		[object]
+		$MessageData,
+		[Parameter(ValueFromPipeline,
+			ValueFromPipelineByPropertyName,
+			Position = 1)]
+		[string]
+		$Tags
+	)
 
-   begin
-   {
-      $Logger = (Get-NLogLogger)
-   }
+	begin
+ {
+		$Logger = (Get-NLogLogger)
+	}
 
-   process
-   {
-      # Write to Log if possible
-      if ($null -ne $Logger)
-      {
-         $Logger.Info($MessageData)
-      }
+	process
+ {
+		# Write to Log if possible
+		if ($null -ne $Logger)
+		{
+			$Logger.Info($MessageData)
+		}
 
-      # Write to original Message Stream
-      Microsoft.PowerShell.Utility\Write-Information @PSBoundParameters
-   }
+		# Write to original Message Stream
+		Microsoft.PowerShell.Utility\Write-Information @PSBoundParameters
+	}
 }

@@ -1,6 +1,6 @@
 ﻿function Write-NLogDebug
 {
-   <#
+	<#
          .SYNOPSIS
          Writes a message on 'Debug' log level and to the Debug Message stream.
 
@@ -15,36 +15,39 @@
          Inspired by PSNLog, a Wrapper for NLog to easily use NLog logging capabilities in PowerShell, by Maik Koster
 
          .LINK
+         https://github.com/jhochwald/PSNLog
+
+         .LINK
          Write-Debug
    #>
-   [CmdletBinding(ConfirmImpact = 'None')]
-   param
-   (
-      [Parameter(Mandatory,
-            ValueFromPipeline,
-            ValueFromPipelineByPropertyName,
-            Position = 0,
-      HelpMessage = 'Specifies the debug message to send to the console.')]
-      [AllowEmptyString()]
-      [Alias('Msg')]
-      [string]
-      $Message
-   )
+	[CmdletBinding(ConfirmImpact = 'None')]
+	param
+	(
+		[Parameter(Mandatory,
+			ValueFromPipeline,
+			ValueFromPipelineByPropertyName,
+			Position = 0,
+			HelpMessage = 'Specifies the debug message to send to the console.')]
+		[AllowEmptyString()]
+		[Alias('Msg')]
+		[string]
+		$Message
+	)
 
-   begin
-   {
-      $Logger = (Get-NLogLogger)
-   }
+	begin
+ {
+		$Logger = (Get-NLogLogger)
+	}
 
-   process
-   {
-      # Write to Log if possible
-      if ($null -ne $Logger)
-      {
-         $Logger.Debug($Message)
-      }
+	process
+ {
+		# Write to Log if possible
+		if ($null -ne $Logger)
+		{
+			$Logger.Debug($Message)
+		}
 
-      # Write to original Message Stream
-      Microsoft.PowerShell.Utility\Write-Debug @PSBoundParameters
-   }
+		# Write to original Message Stream
+		Microsoft.PowerShell.Utility\Write-Debug @PSBoundParameters
+	}
 }

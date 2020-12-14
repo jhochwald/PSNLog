@@ -1,6 +1,6 @@
 function Get-NLogConfiguration
 {
-   <#
+	<#
          .SYNOPSIS
          Returns the current NLog configuration.
 
@@ -20,21 +20,24 @@ function Get-NLogConfiguration
          License: BSD 3-Clause "New" or "Revised" License
 
          .LINK
+         https://github.com/jhochwald/PSNLog
+
+         .LINK
          https://github.com/MaikKoster/PSNLog
    #>
-   [CmdletBinding(ConfirmImpact = 'None')]
-   [OutputType([NLog.Config.LoggingConfiguration])]
-   param ()
+	[CmdletBinding(ConfirmImpact = 'None')]
+	[OutputType([NLog.Config.LoggingConfiguration])]
+	param ()
 
-   process
-   {
-      if ($null -eq [NLog.LogManager]::Configuration)
-      {
-         (New-Object -TypeName NLog.Config.LoggingConfiguration)
-      }
-      else
-      {
-         [NLog.LogManager]::Configuration
-      }
-   }
+	process
+ {
+		if ($null -eq [NLog.LogManager]::Configuration)
+		{
+			(New-Object -TypeName NLog.Config.LoggingConfiguration)
+		}
+		else
+		{
+			[NLog.LogManager]::Configuration
+		}
+	}
 }

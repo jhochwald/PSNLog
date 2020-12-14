@@ -1,6 +1,6 @@
 function Read-NLogConfiguration
 {
-   <#
+	<#
          .SYNOPSIS
          Returns a NLog configuration based on a configuration file.
 
@@ -27,28 +27,31 @@ function Read-NLogConfiguration
          License: BSD 3-Clause "New" or "Revised" License
 
          .LINK
+         https://github.com/jhochwald/PSNLog
+
+         .LINK
          https://github.com/MaikKoster/PSNLog
    #>
-   [CmdletBinding(ConfirmImpact = 'None')]
-   [OutputType([NLog.Config.LoggingConfiguration])]
-   param
-   (
-      [Parameter(Mandatory,
-            ValueFromPipeline,
-            ValueFromPipelineByPropertyName,
-            Position = 0,
-      HelpMessage = ' Specifies the name and path to the NLog configuration file')]
-      [ValidateScript( {
-               ((Test-Path -Path $_) -and ((Get-Item -Path $_).Extension -match '\.(config|nlog)'))
-      })]
-      [ValidateNotNullOrEmpty()]
-      [Alias('FullName')]
-      [string]
-      $Filename
-   )
+	[CmdletBinding(ConfirmImpact = 'None')]
+	[OutputType([NLog.Config.LoggingConfiguration])]
+	param
+	(
+		[Parameter(Mandatory,
+			ValueFromPipeline,
+			ValueFromPipelineByPropertyName,
+			Position = 0,
+			HelpMessage = ' Specifies the name and path to the NLog configuration file')]
+		[ValidateScript( {
+				((Test-Path -Path $_) -and ((Get-Item -Path $_).Extension -match '\.(config|nlog)'))
+			})]
+		[ValidateNotNullOrEmpty()]
+		[Alias('FullName')]
+		[string]
+		$Filename
+	)
 
-   process
-   {
-      (New-Object -TypeName NLog.Config.XmlLoggingConfiguration -ArgumentList ($Filename, $true))
-   }
+	process
+ {
+		(New-Object -TypeName NLog.Config.XmlLoggingConfiguration -ArgumentList ($Filename, $true))
+	}
 }

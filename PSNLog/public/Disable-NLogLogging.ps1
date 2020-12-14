@@ -1,6 +1,6 @@
 function Disable-NLogLogging
 {
-   <#
+	<#
          .SYNOPSIS
          Disables all logging.
 
@@ -19,20 +19,23 @@ function Disable-NLogLogging
          License: BSD 3-Clause "New" or "Revised" License
 
          .LINK
+         https://github.com/jhochwald/PSNLog
+
+         .LINK
          https://github.com/MaikKoster/PSNLog
    #>
-   [CmdletBinding(ConfirmImpact = 'None')]
-   param ()
+	[CmdletBinding(ConfirmImpact = 'None')]
+	param ()
 
-   process
-   {
-      do
-      {
-         if ([NLog.Logmanager]::IsLoggingEnabled())
-         {
-            $null = ([NLog.Logmanager]::DisableLogging())
-         }
-      }
-      while ([NLog.Logmanager]::IsLoggingEnabled())
-   }
+	process
+ {
+		do
+		{
+			if ([NLog.Logmanager]::IsLoggingEnabled())
+			{
+				$null = ([NLog.Logmanager]::DisableLogging())
+			}
+		}
+		while ([NLog.Logmanager]::IsLoggingEnabled())
+	}
 }

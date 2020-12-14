@@ -1,6 +1,6 @@
 function Test-NLogLogging
 {
-   <#
+	<#
          .SYNOPSIS
          Verifies if logging is enabled.
 
@@ -20,14 +20,17 @@ function Test-NLogLogging
          License: BSD 3-Clause "New" or "Revised" License
 
          .LINK
+         https://github.com/jhochwald/PSNLog
+
+         .LINK
          https://github.com/MaikKoster/PSNLog
    #>
-   [CmdletBinding(ConfirmImpact = 'None')]
-   [OutputType([bool])]
-   param ()
+	[CmdletBinding(ConfirmImpact = 'None')]
+	[OutputType([bool])]
+	param ()
 
-   process
-   {
-      [NLog.Logmanager]::IsLoggingEnabled()
-   }
+	process
+ {
+		[NLog.Logmanager]::IsLoggingEnabled()
+	}
 }

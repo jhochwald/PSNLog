@@ -1,6 +1,6 @@
 function Write-NLogWarning
 {
-   <#
+	<#
          .SYNOPSIS
          Writes a message on 'Warn' log level and to the Warning Message stream.
 
@@ -18,39 +18,42 @@ function Write-NLogWarning
          License: BSD 3-Clause "New" or "Revised" License
 
          .LINK
+         https://github.com/jhochwald/PSNLog
+
+         .LINK
          https://github.com/MaikKoster/PSNLog
 
          .LINK
          Write-Warning
    #>
 
-   [CmdletBinding(ConfirmImpact = 'None')]
-   param
-   (
-      [Parameter(Mandatory,
-            ValueFromPipeline,
-            Position = 0,
-      HelpMessage = 'Specifies the warning message.')]
-      [AllowEmptyString()]
-      [Alias('Msg')]
-      [string]
-      $Message
-   )
+	[CmdletBinding(ConfirmImpact = 'None')]
+	param
+	(
+		[Parameter(Mandatory,
+			ValueFromPipeline,
+			Position = 0,
+			HelpMessage = 'Specifies the warning message.')]
+		[AllowEmptyString()]
+		[Alias('Msg')]
+		[string]
+		$Message
+	)
 
-   begin
-   {
-      $Logger = (Get-NLogLogger)
-   }
+	begin
+ {
+		$Logger = (Get-NLogLogger)
+	}
 
-   process
-   {
-      # Write to Log if possible
-      if ($null -ne $Logger)
-      {
-         $Logger.Warn($Message)
-      }
+	process
+ {
+		# Write to Log if possible
+		if ($null -ne $Logger)
+		{
+			$Logger.Warn($Message)
+		}
 
-      # Write to original Message Stream
-      Microsoft.PowerShell.Utility\Write-Warning @PSBoundParameters
-   }
+		# Write to original Message Stream
+		Microsoft.PowerShell.Utility\Write-Warning @PSBoundParameters
+	}
 }
