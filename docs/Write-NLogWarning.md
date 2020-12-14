@@ -1,7 +1,7 @@
 ---
 external help file: PSNLog-help.xml
 Module Name: PSNLog
-online version:
+online version: https://github.com/MaikKoster/PSNLog
 schema: 2.0.0
 ---
 
@@ -32,7 +32,7 @@ PS C:\> {{ Add example code here }}
 ## PARAMETERS
 
 ### -Message
-{{Fill Message Description}}
+Specifies the warning message.
 
 ```yaml
 Type: String
@@ -47,13 +47,22 @@ Accept wildcard characters: False
 ```
 
 ### CommonParameters
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable.
-For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
 ## OUTPUTS
 
 ## NOTES
+The original is part of PSNLog, a Wrapper for NLog to easily use NLog logging capabilities in PowerShell, by Maik Koster
+(c) 2018 Maik Koster.
+All rights reserved.
+
+License: BSD 3-Clause "New" or "Revised" License
 
 ## RELATED LINKS
+
+[https://github.com/MaikKoster/PSNLog](https://github.com/MaikKoster/PSNLog)
+
+[Write-Warning]()
+

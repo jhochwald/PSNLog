@@ -5,20 +5,20 @@ online version: https://github.com/MaikKoster/PSNLog
 schema: 2.0.0
 ---
 
-# Write-NLogVerbose
+# Write-NLogOutput
 
 ## SYNOPSIS
-Writes a message on 'Debug' log level and to the Verbose Message stream.
+Writes a message on 'Info' log level and to the Output.
 
 ## SYNTAX
 
 ```
-Write-NLogVerbose [-Message] <String> [<CommonParameters>]
+Write-NLogOutput [-InputObject] <String> [-NoEnumerate] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Writes a message on 'Debug' log level and to the Verbose Message stream.
-Can be used to override the native Write-Verbose CmdLet.
+Writes a message on 'Info' log level and to the Output.
+Can be used to override the native Write-Host CmdLet.
 
 ## EXAMPLES
 
@@ -31,19 +31,38 @@ PS C:\> {{ Add example code here }}
 
 ## PARAMETERS
 
-### -Message
-Specifies the message to display.
-This parameter is required.
-You can also pipe a message string to Write-NLogVerbose.
+### -InputObject
+Specifies the objects to send down the pipeline.
+Enter a variable that contains the objects, or type a command or expression that gets the objects.
 
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: Msg
+Aliases: Msg, Message
 
 Required: True
 Position: 1
 Default value: None
+Accept pipeline input: True (ByPropertyName, ByValue)
+Accept wildcard characters: False
+```
+
+### -NoEnumerate
+By default, the \`Write-Output\` cmdlet always enumerates its output.
+The NoEnumerate parameter suppresses the default behavior, and prevents \`Write-Output\` from enumerating output.
+The NoEnumerate parameter has no effect on collections that were created by wrapping commands in parentheses, because the parentheses force enumeration.
+
+\> \[!IMPORTANT\] \> There is an issue with this switch in Windows PowerShell that is fixed in PowerShell 6.2 and above.
+\> When using NoEnumerate
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 2
+Default value: False
 Accept pipeline input: True (ByPropertyName, ByValue)
 Accept wildcard characters: False
 ```
@@ -66,5 +85,5 @@ License: BSD 3-Clause "New" or "Revised" License
 
 [https://github.com/MaikKoster/PSNLog](https://github.com/MaikKoster/PSNLog)
 
-[Write-Verbose]()
+[Write-Output]()
 

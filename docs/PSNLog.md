@@ -1,56 +1,65 @@
 ﻿---
 Module Name: PSNLog
-Module Guid: fe52b5c2-b2f8-4804-87c6-8606410b8f7d
-Download Help Link: https://github.com/MaikKoster/PSNLog//blob/master/docs/PSNLog.md
-Help Version: 0.2.5
+Module Guid: ff0a6f42-b535-47c5-8df8-f9adb9371198
+Download Help Link: https://github.com/jhochwald/PSNLog//blob/master/docs/PSNLog.md
+Help Version: 0.3.0
 Locale: en-US
 ---
 
 # PSNLog Module
 ## Description
-Wrapper for NLog to easily use NLog logging capabilities in PowerShell.
+{{ Fill in the Description }}
 
 ## PSNLog Cmdlets
 ### [Disable-NLogLogging](Disable-NLogLogging.md)
-Disables all logging.
+{{ Fill in the Description }}
 
 ### [Enable-NLogLogging](Enable-NLogLogging.md)
-Enables simple logging for trivial logging cases.
+{{ Fill in the Description }}
 
 ### [Get-NLogConfiguration](Get-NLogConfiguration.md)
-Returns the current NLog configuration.
+{{ Fill in the Description }}
 
 ### [Get-NLogLogger](Get-NLogLogger.md)
-Gets a NLog Logger instance
+{{ Fill in the Description }}
 
 ### [New-NLogFileTarget](New-NLogFileTarget.md)
-Creates a new NLog file logging target.
+{{ Fill in the Description }}
 
 ### [New-NLogRule](New-NLogRule.md)
-Creates a new NLog logging rule.
+{{ Fill in the Description }}
 
 ### [New-NLogTarget](New-NLogTarget.md)
-Creates a new NLog logging target.
+{{ Fill in the Description }}
 
 ### [Read-NLogConfiguration](Read-NLogConfiguration.md)
-Returns a NLog configuration based on a configuration file.
+{{ Fill in the Description }}
 
 ### [Set-NLogConfiguration](Set-NLogConfiguration.md)
-Sets the NLog logging configuration.
+{{ Fill in the Description }}
 
 ### [Test-NLogLogging](Test-NLogLogging.md)
-Verifies if logging is enabled.
+{{ Fill in the Description }}
+
+### [Write-NLogDebug](Write-NLogDebug.md)
+{{ Fill in the Description }}
 
 ### [Write-NLogError](Write-NLogError.md)
-Writes a message on 'Error' log leve and to the Error Message stream.
+{{ Fill in the Description }}
 
 ### [Write-NLogHost](Write-NLogHost.md)
-Writes a message on 'Info' log level and to the Host.
+{{ Fill in the Description }}
+
+### [Write-NLogInfo](Write-NLogInfo.md)
+{{ Fill in the Description }}
+
+### [Write-NLogOutput](Write-NLogOutput.md)
+{{ Fill in the Description }}
 
 ### [Write-NLogVerbose](Write-NLogVerbose.md)
-Writes a message on 'Debug' log level and to the Verbose Message stream.
+{{ Fill in the Description }}
 
 ### [Write-NLogWarning](Write-NLogWarning.md)
-Writes a message on 'Warn' log level and to the Warning Message stream.
+{{ Fill in the Description }}
 
 

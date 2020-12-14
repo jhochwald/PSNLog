@@ -1,7 +1,7 @@
 ---
 external help file: PSNLog-help.xml
 Module Name: PSNLog
-online version:
+online version: https://github.com/MaikKoster/PSNLog
 schema: 2.0.0
 ---
 
@@ -14,18 +14,18 @@ Creates a new NLog logging rule.
 
 ### MinLevel (Default)
 ```
-New-NLogRule [[-LoggerNamePattern] <String>] -MinimumLevel <String> -Target <Target> [<CommonParameters>]
+New-NLogRule [-LoggerNamePattern <String>] -MinimumLevel <String> -Target <Target> [<CommonParameters>]
 ```
 
 ### MinMaxLevel
 ```
-New-NLogRule [[-LoggerNamePattern] <String>] -MinimumLevel <String> -MaximumLevel <String> -Target <Target>
+New-NLogRule [-LoggerNamePattern <String>] -MinimumLevel <String> -MaximumLevel <String> -Target <Target>
  [<CommonParameters>]
 ```
 
 ### DisabledRule
 ```
-New-NLogRule [[-LoggerNamePattern] <String>] [-Disabled] -Target <Target> [<CommonParameters>]
+New-NLogRule [-LoggerNamePattern <String>] [-Disabled] -Target <Target> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -50,16 +50,28 @@ Create a new rule to log all Warn level messages.
 ## PARAMETERS
 
 ### -LoggerNamePattern
-Specifies the Logger name pattern
 It may include the '*' wildcard at the beginning, at the end or at both ends.
+Specifies the Logger name pattern
 
 ```yaml
 Type: String
-Parameter Sets: (All)
+Parameter Sets: MinLevel, MinMaxLevel
 Aliases:
 
 Required: False
-Position: 1
+Position: Named
+Default value: *
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+```yaml
+Type: String
+Parameter Sets: DisabledRule
+Aliases:
+
+Required: False
+Position: Named
 Default value: *
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -76,7 +88,7 @@ Aliases:
 Required: True
 Position: Named
 Default value: False
-Accept pipeline input: False
+Accept pipeline input: True (ByPropertyName, ByValue)
 Accept wildcard characters: False
 ```
 
@@ -85,13 +97,25 @@ Specifies the minimum log level needed to trigger this rule.
 
 ```yaml
 Type: String
-Parameter Sets: MinLevel, MinMaxLevel
+Parameter Sets: MinLevel
 Aliases: MinLevel
 
 Required: True
 Position: Named
 Default value: None
-Accept pipeline input: False
+Accept pipeline input: True (ByPropertyName, ByValue)
+Accept wildcard characters: False
+```
+
+```yaml
+Type: String
+Parameter Sets: MinMaxLevel
+Aliases: MinLevel
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: True (ByPropertyName, ByValue)
 Accept wildcard characters: False
 ```
 
@@ -106,7 +130,7 @@ Aliases: MaxLevel
 Required: True
 Position: Named
 Default value: None
-Accept pipeline input: False
+Accept pipeline input: True (ByPropertyName, ByValue)
 Accept wildcard characters: False
 ```
 
@@ -115,7 +139,19 @@ Specifies the target to be written to when the rule matches.
 
 ```yaml
 Type: Target
-Parameter Sets: (All)
+Parameter Sets: MinLevel, MinMaxLevel
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+```yaml
+Type: Target
+Parameter Sets: DisabledRule
 Aliases:
 
 Required: True
@@ -126,15 +162,21 @@ Accept wildcard characters: False
 ```
 
 ### CommonParameters
-This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable.
-For more information, see about_CommonParameters (http://go.microsoft.com/fwlink/?LinkID=113216).
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
 ## OUTPUTS
 
 ### NLog.Config.LoggingRule
-
 ## NOTES
+The original is part of PSNLog, a Wrapper for NLog to easily use NLog logging capabilities in PowerShell, by Maik Koster
+(c) 2018 Maik Koster.
+All rights reserved.
+
+License: BSD 3-Clause "New" or "Revised" License
 
 ## RELATED LINKS
+
+[https://github.com/MaikKoster/PSNLog](https://github.com/MaikKoster/PSNLog)
+

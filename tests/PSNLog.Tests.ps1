@@ -31,7 +31,7 @@ Describe "Manifest" {
     }
 
     It "has a valid guid" {
-        $Script:Manifest.Guid | Should Be 'fe52b5c2-b2f8-4804-87c6-8606410b8f7d'
+        $Script:Manifest.Guid | Should Be 'ff0a6f42-b535-47c5-8df8-f9adb9371198'
     }
 
     It "has no prefix" {

@@ -2,22 +2,25 @@
 
 ## [0.3.0] - Unreleased
 
-Started a fork of "PSNLog" Version 0.2.5, a Wrapper for NLog to easily use NLog logging capabilities in PowerShell, by Maik Koster.
+Started a new fork of "PSNLog" Version 0.2.5, a Wrapper for NLog to easily use NLog logging capabilities in PowerShell, by Maik Koster.
 
 ### Added
 
-- Output, Info
+- Write-NLogOutput as a wrapper for Write-Output
+- Write-NLogInfo as a wrapper for Write-Information
 
 ### Changed
 
-- Header of all Files
-- Syntax
-- Document the parameters
+- Add header of all Files
+- Syntax on all PowerShell Files
+- Document the parameters, Synopsis and others
+- Upgraded the NLog.dll to version 4.7.6
+- Changed the default logging configuration (include an alias for everything except Write-Host by default)
 
 ### Fixed
 
 - a few minor glitches
-- Add missing parameter descriptions
+- Add missing help for mandatory parameters
 
 ---
 

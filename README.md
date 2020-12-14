@@ -4,7 +4,9 @@
 
 # PSNLog PowerShell module
 
-The "PSNLog" PowerShell module is a wrapper around the famous, flexible and free open source logging for .Net component [NLog](http://nlog-project.org/). This is a fork of "PSNLog" Version 0.2.5 by [Maik Koster](https://github.com/MaikKoster/PSNLog).
+The "PSNLog" PowerShell module is a wrapper around the famous, flexible and free open source logging for .Net component [NLog](http://nlog-project.org/).
+
+This is a fork of "PSNLog" Version 0.2.5 by [Maik Koster](https://github.com/MaikKoster/PSNLog).
 
 Proper logging is a common requirement within most PowerShell scripts and modules. There are a lot of possibilities to support logging within PowerShell. However, most of them are very limited in their capabilities and/or intrusive to the script/module.
 
@@ -22,6 +24,8 @@ PowerShell Version 5.0+
 NLog - Copyright (c) Copyright (c) 2004-2020 Jaroslaw Kowalski <jaak@jkowalski.net>, Kim Christensen, Julian Verdurmen. Please see [License](https://github.com/NLog/NLog/blob/master/LICENSE.txt).
 
 ## Install
+
+Will be back soon!
 
 <!--
 ### PowerShell Gallery Install (Requires PowerShell v5)
@@ -61,10 +65,24 @@ On default, messages written by **Write-Verbose** will have a log level of **Deb
 You can now test the behaviour by calling
 
 ```powershell
-Write-Verbose 'This is a verbose message'
-Write-Host 'This is a "Host" message'
-Write-Warning 'This is a warning message'
-Write-Error 'This is an error message'
+Write-Debug ("Some debug message")
+Write-Information ("Some info message")
+Write-Warning ("Some warn message")
+Write-Output ("Some Console message")
+Write-Error ("Some error message")
+```
+
+The output will look like this:
+
+```
+2020-12-14 11:43:44.7900|DEBUG|<ScriptBlock>|Some debug message
+2020-12-14 11:43:44.8520|INFO|<ScriptBlock>|Some info message2020-12-14 11:43:44.8989|WARN|<ScriptBlock>|Some warn message2020-12-14 11:43:44.9614|INFO|<ScriptBlock>|Some Console message2020-12-14 11:43:46.4629|ERROR|<ScriptBlock>|Some error message
+```
+
+If you decide to execute a script (in this example the script name is `doit.ps1`), the name of the script is also logged:
+
+```
+2020-12-14 11:42:42.9662|DEBUG|doit.ps1|Some debug message2020-12-14 11:42:43.0123|INFO|doit.ps1|Some info message2020-12-14 11:42:43.0281|WARN|doit.ps1|Some warn message2020-12-14 11:42:43.0436|INFO|doit.ps1|Some Console message
 ```
 
 The Cmdlets will still write proper output as they are supposed to. If you now check the logfile, you should see the messages also being logged to the log file. On default, it's using the '${cmtrace}' layout renderer, to write log messages in a format that is consumable by CMTrace. A real-time log viewer used in Microsoft System Center Configuration Manager. As that's basically what I'm dealing with most of the time ;)
@@ -93,7 +111,7 @@ While using **Write-Verbose**, **Write-Host**, **Write-Warning** and **Write-Err
 So lets log to a custom log file and enable daily archiving of this log file
 
 ```powershell
-$paramNewNLogFileTarget = @{	Name								  = 'MyFileTArget'	Filename						     = 'C:\scripts\PowerShell\logs\MyLogFile.log'	ArchiveFileName				  = 'C:\scripts\PowerShell\logs\archive\MyLog.{#}.log'	ArchiveNumbering				  = 'Date'	ArchiveEvery					  = 'Day'	MaxArchiveFiles				  = 14	ArchiveDateFormat			     = 'yyyyMMdd'	EnableArchiveFileCompression = $true}$Target = New-NLogFileTarget @paramNewNLogFileTarget
+$paramNewNLogFileTarget = @{	Name 							= 'MyFileTArget'	Filename 						= 'C:\scripts\PowerShell\logs\MyLogFile.log'	ArchiveFileName 				= 'C:\scripts\PowerShell\logs\archive\MyLog.{#}.log'	ArchiveNumbering 				= 'Date'	ArchiveEvery 					= 'Day'	MaxArchiveFiles 				= 14	ArchiveDateFormat			  	= 'yyyyMMdd'	EnableArchiveFileCompression	= $true}$Target = New-NLogFileTarget @paramNewNLogFileTarget
 Enable-NLogLogging -Target $Target -DontRedirectMessages
 ```
 
@@ -108,6 +126,12 @@ $Logger.Warn("Some warn message")
 $Logger.Error("Some error message")
 $Logger.Trace("Some trace message")
 
+```
+
+The output will look like this:
+
+```
+2020-12-14 11:48:16.0241|DEBUG||Some debug message2020-12-14 11:48:16.0710|INFO||Some info message2020-12-14 11:48:16.1022|WARN||Some warn message2020-12-14 11:48:16.1335|ERROR||Some error message2020-12-14 11:48:17.2136|TRACE||Some trace message
 ```
 
 ## Contributors

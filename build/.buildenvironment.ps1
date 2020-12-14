@@ -6,7 +6,7 @@
 $ModuleToBuild = 'PSNLog'
 
 # Project website (used for external help cab file definition)
-$ModuleWebsite = 'https://github.com/MaikKoster/PSNLog'
+$ModuleWebsite = 'https://github.com/jhochwald/PSNLog'
 
 # Name of the folder, containing the documentation
 $DocumentsFolder = "docs"

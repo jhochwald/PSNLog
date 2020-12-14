@@ -1,6 +1,6 @@
 function New-NLogTarget
 {
-<#
+	<#
 .SYNOPSIS
 Creates a new NLog logging target.
 
@@ -78,102 +78,89 @@ License: BSD 3-Clause "New" or "Revised" License
 .LINK
 https://github.com/MaikKoster/PSNLog
 #>
-	
+
 	[CmdletBinding(DefaultParameterSetName = 'ByTypeName',
-						ConfirmImpact = 'None')]
+		ConfirmImpact = 'None')]
 	[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseShouldProcessForStateChangingFunctions', '')]
 	[OutputType([NLog.Targets.Target])]
 	param
 	(
-		[Parameter(ValueFromPipeline = $true,
-					  ValueFromPipelineByPropertyName = $true,
-					  Position = 0)]
+		[Parameter(ValueFromPipeline,
+			ValueFromPipelineByPropertyName,
+			Position = 0)]
 		[string]
 		$Name,
 		[Parameter(ParameterSetName = 'ByTypeName',
-					  Mandatory = $true,
-					  ValueFromPipeline = $true,
-					  ValueFromPipelineByPropertyName = $true,
-					  Position = 1,
-					  HelpMessage = ' Can be used to create targets not explicitly covered by any switch
- Specifies the type name of the target.')]
+			Mandatory,
+			ValueFromPipeline,
+			ValueFromPipelineByPropertyName,
+			Position = 1,
+			HelpMessage = 'Can be used to create targets not explicitly covered by any switch Specifies the type name of the target.')]
 		[ValidateNotNullOrEmpty()]
 		[string]
 		$TargetType,
 		[Parameter(ParameterSetName = 'NullTarget',
-					  Mandatory = $false,
-					  ValueFromPipeline = $true,
-					  ValueFromPipelineByPropertyName = $true,
-					  HelpMessage = ' NullTargets discards any log messages. Used mainly for debugging and benchmarking.')]
+			ValueFromPipeline,
+			ValueFromPipelineByPropertyName)]
 		[switch]
 		$NullTarget,
 		[Parameter(ParameterSetName = 'ConsoleTarget',
-					  Mandatory = $false,
-					  ValueFromPipeline = $true,
-					  ValueFromPipelineByPropertyName = $true,
-					  HelpMessage = ' Writes log messages to the console.')]
+			ValueFromPipeline,
+			ValueFromPipelineByPropertyName)]
 		[switch]
 		$ConsoleTarget,
 		[Parameter(ParameterSetName = 'DatabaseTarget',
-					  Mandatory = $false,
-					  ValueFromPipeline = $true,
-					  ValueFromPipelineByPropertyName = $true,
-					  HelpMessage = ' Writes log messages to the database using an ADO.NET provider.')]
+			ValueFromPipeline,
+			ValueFromPipelineByPropertyName)]
 		[switch]
 		$DatabaseTarget,
 		[Parameter(ParameterSetName = 'DebugTarget',
-					  Mandatory = $false,
-					  ValueFromPipeline = $true,
-					  ValueFromPipelineByPropertyName = $true,
-					  HelpMessage = ' Writes log messages to the database using an ADO.NET provider.')]
+			ValueFromPipeline,
+			ValueFromPipelineByPropertyName)]
 		[switch]
 		$DebugTarget,
 		[Parameter(ParameterSetName = 'EventLogTarget',
-					  Mandatory = $false,
-					  ValueFromPipeline = $true,
-					  ValueFromPipelineByPropertyName = $true,
-					  HelpMessage = 'Writes log message to the Event Log.')]
+			ValueFromPipeline,
+			ValueFromPipelineByPropertyName)]
 		[switch]
 		$EventLogTarget,
 		[Parameter(ParameterSetName = 'FileTarget',
-					  ValueFromPipeline = $true,
-					  ValueFromPipelineByPropertyName = $true)]
+			ValueFromPipeline,
+			ValueFromPipelineByPropertyName)]
 		[switch]
 		$FileTarget,
 		[Parameter(ParameterSetName = 'MailTarget',
-					  ValueFromPipeline = $true,
-					  ValueFromPipelineByPropertyName = $true,
-					  HelpMessage = 'Add help message for user')]
+			ValueFromPipeline,
+			ValueFromPipelineByPropertyName)]
 		[switch]
 		$MailTarget,
 		[Parameter(ParameterSetName = 'MemoryTarget',
-					  ValueFromPipeline = $true,
-					  ValueFromPipelineByPropertyName = $true)]
+			ValueFromPipeline,
+			ValueFromPipelineByPropertyName)]
 		[switch]
 		$MemoryTarget,
 		[Parameter(ParameterSetName = 'NetworkTarget',
-					  ValueFromPipeline = $true,
-					  ValueFromPipelineByPropertyName = $true,
-					  HelpMessage = 'Add help message for user')]
+			ValueFromPipeline,
+			ValueFromPipelineByPropertyName)]
 		[switch]
 		$NetworkTarget,
 		[Parameter(ParameterSetName = 'NLogViewerTarget',
-					  ValueFromPipeline = $true,
-					  ValueFromPipelineByPropertyName = $true)]
+			ValueFromPipeline,
+			ValueFromPipelineByPropertyName)]
 		[switch]
 		$NLogViewerTarget,
 		[Parameter(ParameterSetName = 'PerformanceCounterTarget',
-					  ValueFromPipeline = $true,
-					  ValueFromPipelineByPropertyName = $true)]
+			ValueFromPipeline,
+			ValueFromPipelineByPropertyName)]
 		[switch]
 		$PerformanceCounterTarget,
 		[Parameter(ParameterSetName = 'WebServiceTarget',
-					  ValueFromPipeline = $true,
-					  ValueFromPipelineByPropertyName = $true)]
+			ValueFromPipeline,
+			ValueFromPipelineByPropertyName)]
 		[switch]
 		$WebServiceTarget
 	)
-	
+
 	process
 	{
 		$Target = $null
@@ -183,91 +170,93 @@ https://github.com/MaikKoster/PSNLog
 			{
 				if ($TargetType -like 'NLog.Targets.*')
 				{
-					$Target = New-Object -TypeName $TargetType
+					$Target = (New-Object -TypeName $TargetType)
 				}
 				elseif ($TargetType -like 'Targets.*')
 				{
-					$Target = New-Object -TypeName NLog.$TargetType
+					$Target = (New-Object -TypeName NLog.$TargetType)
 				}
 				else
 				{
-					$Target = New-Object -TypeName NLog.Targets.$TargetType
+					$Target = (New-Object -TypeName NLog.Targets.$TargetType)
 				}
 				break
 			}
 			'NullTarget'
 			{
-				$Target = New-Object -TypeName NLog.Targets.NullTarget
+				$Target = (New-Object -TypeName NLog.Targets.NullTarget)
 				break
 			}
 			'ConsoleTarget'
 			{
-				$Target = New-Object -TypeName NLog.Targets.ConsoleTarget
+				$Target = (New-Object -TypeName NLog.Targets.ConsoleTarget)
 				break
 			}
 			'DatabaseTarget'
 			{
-				$Target = New-Object -TypeName NLog.Targets.DatabaseTarget
+				$Target = (New-Object -TypeName NLog.Targets.DatabaseTarget)
 				break
 			}
 			'DebugTarget'
 			{
-				$Target = New-Object -TypeName NLog.Targets.DebugTarget
+				$Target = (New-Object -TypeName NLog.Targets.DebugTarget)
 				break
 			}
 			'EventLogTarget'
 			{
-				$Target = New-Object -TypeName NLog.Targets.EventLogTarget
+				$Target = (New-Object -TypeName NLog.Targets.EventLogTarget)
 				break
 			}
 			'FileTarget'
 			{
-				$Target = New-Object -TypeName NLog.Targets.FileTarget
+				$Target = (New-Object -TypeName NLog.Targets.FileTarget)
 				break
 			}
 			'MailTarget'
 			{
-				$Target = New-Object -TypeName NLog.Targets.MailTarget
+				$Target = (New-Object -TypeName NLog.Targets.MailTarget)
 				break
 			}
 			'MemoryTarget'
 			{
-				$Target = New-Object -TypeName NLog.Targets.MemoryTarget
+				$Target = (New-Object -TypeName NLog.Targets.MemoryTarget)
 				break
 			}
 			'NetworkTarget'
 			{
-				$Target = New-Object -TypeName NLog.Targets.NetworkTarget
+				$Target = (New-Object -TypeName NLog.Targets.NetworkTarget)
 				break
 			}
 			'NLogViewerTarget'
 			{
-				$Target = New-Object -TypeName NLog.Targets.NLogViewerTarget
+				$Target = (New-Object -TypeName NLog.Targets.NLogViewerTarget)
 				break
 			}
 			'PerformanceCounterTarget'
 			{
-				$Target = New-Object -TypeName NLog.Targets.PerformanceCounterTarget
+				$Target = (New-Object -TypeName NLog.Targets.PerformanceCounterTarget)
 				break
 			}
 			'WebServiceTarget'
 			{
-				$Target = New-Object -TypeName NLog.Targets.WebServiceTarget
+				$Target = (New-Object -TypeName NLog.Targets.WebServiceTarget)
 				break
 			}
 		}
-		
-		if ($null -ne $Target)
-		{
-			if ([string]::IsNullOrEmpty($Name))
-			{
-				# Generate random string
-				$Name = -join ((65 .. 90) | Get-Random -Count 6 | ForEach-Object -Process {
-						[char]$_
-					})
-			}
-			$Target.Name = $Name
-			$Target
-		}
+
+      if ($null -ne $Target)
+      {
+         if ([string]::IsNullOrEmpty($Name))
+         {
+            # Generate random string
+            $Name = -join ((65 .. 90) | Get-Random -Count 6 | ForEach-Object -Process {
+                  [char]$_
+               })
+         }
+
+         $Target.Name = $Name
+
+         $Target
+      }
 	}
 }
