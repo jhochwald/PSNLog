@@ -22,17 +22,22 @@ _OR_
 
 PowerShell Core 7.x, or newer. It is tested with PowerShell Core 7.1.0 and 7.2.0-preview.1 on Windows 10 (20H2)
 
+### .NET Framework
+
 .NET Frameworks 4.5 - 4.8. In theory older versions might work, but I use the [NLog](http://nlog-project.org/) net45 64Bit DLL!
-.NET Core might work, the [NLog](http://nlog-project.org/) project provides support for it, I never tried it!
+.NET Core could/might/should work, the [NLog](http://nlog-project.org/) project provides support for it! I never tried it.
 
-Other plattforms (e.g. macOS) are not tested or supported. The [NLog](http://nlog-project.org/) project provides a Xamarin build.
+### Plattform
 
+This is a Windows solution. At least for now!
+
+Other plattforms (e.g. macOS) are not tested or supported. The [NLog](http://nlog-project.org/) project provides at least a Xamarin build.
 
 ## Third party components
 
 [NLog](http://nlog-project.org/) - Copyright (c) Copyright (c) 2004-2020 Jaroslaw Kowalski <jaak@jkowalski.net>, Kim Christensen, Julian Verdurmen.
 
-Please read the [License](https://github.com/NLog/NLog/blob/master/LICENSE.txt) of the NLog project.
+Please read the [License](https://github.com/NLog/NLog/blob/master/LICENSE.txt) of the [NLog](http://nlog-project.org/) project.
 
 ## Install
 
