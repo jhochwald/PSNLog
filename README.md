@@ -12,7 +12,7 @@ This Module allows to use a lot of capabilities and the flexibility of [NLog](ht
 
 This Module version is a fork of "**PSNLog**" Version 0.2.5 by [Maik Koster](https://github.com/MaikKoster/PSNLog).
 
-my next version will drop the fork and I will rename the module to something like "**PSNLog2**" or "**PSNLogNG**". The development will then be moved towards a dedicated directory and this release will then also be published to the PowerShell Gallery! 
+my next version will drop the fork and I will rename the module to something like "**PSNLog2**" or "**PSNLogNG**". The development will then be moved towards a dedicated directory and this release will then also be published to the PowerShell Gallery!
 
 ## Requirements
 
@@ -31,7 +31,7 @@ PowerShell Core 7.x, or newer. It is tested with PowerShell Core 7.1.0 and 7.2.0
 
 This is a Windows solution. At least for now!
 
-Other plattforms (e.g. macOS) are not tested or supported. The [NLog](http://nlog-project.org/) project provides at least a Xamarin build.
+Other platforms (e.g. macOS) are not tested or supported. The [NLog](http://nlog-project.org/) project provides at least a Xamarin build.
 
 ## Third party components
 
@@ -80,7 +80,7 @@ To allow easy integration for existing scripts and modules, it implements a litt
 
 Possible Levels are:
 
-- **Debug** = **Write-Verbose** and **Write-Debug** (great for development and toubleshooting)
+- **Debug** = **Write-Verbose** and **Write-Debug** (great for development and troubleshooting)
 - **Error** = **Write-Error** (Only Errors)
 - **Fatal** = **Write-Error** (Only Errors)
 - **Info**  = **Write-Output** and **Write-Information** (plus **Write-Host**)
@@ -88,7 +88,7 @@ Possible Levels are:
 - **Trace** = Nearly everything is logged (might get a huge and noisy)
 - **Warn** = **Write-Warning** (Might be a smart selection in production)
 
-The default Level is **Info**. That shoul be a solid selection in most usecases. This includes **Write-Warning** and **Write-Error**.
+The default Level is **Info**. That should be a solid selection in most use-cases. This includes **Write-Warning** and **Write-Error**.
 In production you might reduce the logging by using the Level **Warn** or **Error**! You can do this when you create the logger instance!
 
 See in the examples below.
@@ -97,7 +97,7 @@ By default this Module use the **[cmtrace](https://docs.microsoft.com/de-de/mem/
 
 Please see the [NLog Wiki](https://github.com/NLog/NLog/wiki/Configuration-file#log-levels) for more details about the different log levels and how to apply a format to the logs.
 
-You can now test the behaviour by calling
+You can now test the behavior by calling
 
 ```powershell
 Write-Debug ("Some debug message")
@@ -111,20 +111,26 @@ The output will look like this:
 
 ```
 2020-12-14 11:43:44.7900|DEBUG|<ScriptBlock>|Some debug message
-2020-12-14 11:43:44.8520|INFO|<ScriptBlock>|Some info message2020-12-14 11:43:44.8989|WARN|<ScriptBlock>|Some warn message2020-12-14 11:43:44.9614|INFO|<ScriptBlock>|Some Console message2020-12-14 11:43:46.4629|ERROR|<ScriptBlock>|Some error message
+2020-12-14 11:43:44.8520|INFO|<ScriptBlock>|Some info message
+2020-12-14 11:43:44.8989|WARN|<ScriptBlock>|Some warn message
+2020-12-14 11:43:44.9614|INFO|<ScriptBlock>|Some Console message
+2020-12-14 11:43:46.4629|ERROR|<ScriptBlock>|Some error message
 ```
 
-If you decide to execute a script (in this example the script name is `doit.ps1`), the name of the script is also logged:
+If you decide to execute a script (in this example the script name is `nlogger.ps1`), the name of the script is also logged:
 
 ```
-2020-12-14 11:42:42.9662|DEBUG|doit.ps1|Some debug message2020-12-14 11:42:43.0123|INFO|doit.ps1|Some info message2020-12-14 11:42:43.0281|WARN|doit.ps1|Some warn message2020-12-14 11:42:43.0436|INFO|doit.ps1|Some Console message
+2020-12-14 11:42:42.9662|DEBUG|nlogger.ps1|Some debug message
+2020-12-14 11:42:43.0123|INFO|nlogger.ps1|Some info message
+2020-12-14 11:42:43.0281|WARN|nlogger.ps1|Some warn message
+2020-12-14 11:42:43.0436|INFO|nlogger.ps1|Some Console message
 ```
 
-The Cmdlets will still write proper output as they are supposed to. If you now check the logfile, you should see the messages also being logged to the log file. On default, it's using the '${cmtrace}' layout renderer, to write log messages in a format that is consumable by CMTrace. A real-time log viewer used in Microsoft System Center Configuration Manager. As that's basically what I'm dealing with most of the time ;)
+The Cmdlets will still write proper output as they are supposed to. If you now check the log-file, you should see the messages also being logged to the log file. On default, it's using the '${cmtrace}' layout renderer, to write log messages in a format that is consumable by CMTrace. A real-time log viewer used in Microsoft System Center Configuration Manager. As that's basically what I'm dealing with most of the time ;)
 
-### Quickly add logging to a specific logfile
+### Quickly add logging to a specific log-file
 
-In case you might want to write to a different location, you can also specify the exact filename or even use other [Layout Renderer](https://github.com/nlog/nlog/wiki/Layout-Renderers) from Nlog. E.g. to write every log level to a different file, you could use the following
+In case you might want to write to a different location, you can also specify the exact filename or even use other [Layout Renderer](https://github.com/nlog/nlog/wiki/Layout-Renderers) from [NLog](http://nlog-project.org/). E.g. to write every log level to a different file, you could use the following
 
 ```powershell
 Import-Module PSNlog
@@ -146,11 +152,21 @@ While using **Write-Verbose**, **Write-Host**, **Write-Warning** and **Write-Err
 So lets log to a custom log file and enable daily archiving of this log file
 
 ```powershell
-$paramNewNLogFileTarget = @{	Name = 'MyFileTArget'	Filename = 'C:\scripts\PowerShell\logs\MyLogFile.log'	ArchiveFileName = 'C:\scripts\PowerShell\logs\archive\MyLog.{#}.log'	ArchiveNumbering = 'Date'	ArchiveEvery = 'Day'	MaxArchiveFiles = 14	ArchiveDateFormat = 'yyyyMMdd'	EnableArchiveFileCompression = $true}$Target = New-NLogFileTarget @paramNewNLogFileTarget
+$paramNewNLogFileTarget = @{
+	Name = 'MyFileTArget'
+	Filename = 'C:\scripts\PowerShell\logs\MyLogFile.log'
+	ArchiveFileName = 'C:\scripts\PowerShell\logs\archive\MyLog.{#}.log'
+	ArchiveNumbering = 'Date'
+	ArchiveEvery = 'Day'
+	MaxArchiveFiles = 14
+	ArchiveDateFormat = 'yyyyMMdd'
+	EnableArchiveFileCompression = $true
+}
+$Target = New-NLogFileTarget @paramNewNLogFileTarget
 Enable-NLogLogging -Target $Target -DontRedirectMessages
 ```
 
-In this example all Log-files are rolledover daily, all older files are compressed and stored for 14 days. This gives you the flexibility to establish your own logging.
+In this example all Log-files are rolled-over daily, all older files are compressed and stored for 14 days. This gives you the flexibility to establish your own logging.
 
 Then write log messages as following
 
@@ -168,39 +184,51 @@ $Logger.Trace("Some trace message")
 The output will look like this:
 
 ```
-2020-12-14 11:48:16.0241|DEBUG||Some debug message2020-12-14 11:48:16.0710|INFO||Some info message2020-12-14 11:48:16.1022|WARN||Some warn message2020-12-14 11:48:16.1335|ERROR||Some error message2020-12-14 11:48:17.2136|TRACE||Some trace message
+2020-12-14 11:48:16.0241|DEBUG||Some debug message
+2020-12-14 11:48:16.0710|INFO||Some info message
+2020-12-14 11:48:16.1022|WARN||Some warn message
+2020-12-14 11:48:16.1335|ERROR||Some error message
+2020-12-14 11:48:17.2136|TRACE||Some trace message
 ```
 
 Another example with a different logging layout:
 
 ```powershell
-$Target = New-NLogTarget -Name 'Warnings' -FileTarget$Target.Filename = 'C:\scripts\PowerShell\logs\MyLogging.log'$Target.CreateDirs = $true
+$Target = New-NLogTarget -Name 'Warnings' -FileTarget
+$Target.Filename = 'C:\scripts\PowerShell\logs\MyLogging.log'
+$Target.CreateDirs = $true
 Enable-NLogLogging -FileName 'C:\scripts\PowerShell\logs\MyLogging.log' -MinLevel Info -Layout '${longdate} | ${machinename} | ${processname} (${processid}) | ${level:uppercase=true} | ${logger} | ${message}'
 ```
 
 The output will look like this, in this case the script `nlogger.ps1` was called on the computer with the name **HAL-9000**:
 
 ```
-2020-12-14 15:10:37.4358 | HAL-9000 | powershell (1912) | INFO | nlogger.ps1 | Some info message2020-12-14 15:10:37.4358 | HAL-9000 | powershell (1912) | WARN | nlogger.ps1 | Some warn message2020-12-14 15:10:37.4529 | HAL-9000 | powershell (1912) | INFO | nlogger.ps1 | Some Console message2020-12-14 15:10:37.4656 | HAL-9000 | powershell (1912) | ERROR | nlogger.ps1 | Some error message
+2020-12-14 15:10:37.4358 | HAL-9000 | powershell (1912) | INFO | nlogger.ps1 | Some info message
+2020-12-14 15:10:37.4358 | HAL-9000 | powershell (1912) | WARN | nlogger.ps1 | Some warn message
+2020-12-14 15:10:37.4529 | HAL-9000 | powershell (1912) | INFO | nlogger.ps1 | Some Console message
+2020-12-14 15:10:37.4656 | HAL-9000 | powershell (1912) | ERROR | nlogger.ps1 | Some error message
 ```
 
-PowerShell had the PID 1912 in this example above! Add the Hostname to the logging might be usefull if you want to do any central logging!
+PowerShell had the PID 1912 in this example above! Add the Hostname to the logging might be useful if you want to do any central logging!
 
 The same example with PowerShell Core, in this case Version 7.1.0):
 
 ```
-2020-12-14 15:18:56.2251 | HAL-9000 | pwsh (1208) | INFO | doit.ps1 | Some info message2020-12-14 15:18:56.2539 | HAL-9000 | pwsh (1208) | WARN | doit.ps1 | Some warn message2020-12-14 15:18:56.2633 | HAL-9000 | pwsh (1208) | INFO | doit.ps1 | Some Console message2020-12-14 15:18:56.2734 | HAL-9000 | pwsh (1208) | ERROR | doit.ps1 | Some error message
+2020-12-14 15:18:56.2251 | HAL-9000 | pwsh (1208) | INFO | nlogger.ps1 | Some info message
+2020-12-14 15:18:56.2539 | HAL-9000 | pwsh (1208) | WARN | nlogger.ps1 | Some warn message
+2020-12-14 15:18:56.2633 | HAL-9000 | pwsh (1208) | INFO | nlogger.ps1 | Some Console message
+2020-12-14 15:18:56.2734 | HAL-9000 | pwsh (1208) | ERROR | nlogger.ps1 | Some error message
 ```
 
-You can mix and match the logging! for instance: You can log with the level **Error**, rollover daily and keep the Files for 30 days. If you want to observe you system/scripts (e.g. after a bigger change), just create an additional logger instance with the level **Warn** or **Debug** and keep these files for 7 days on a seperate disk.
+You can mix and match the logging! for instance: You can log with the level **Error**, rollover daily and keep the Files for 30 days. If you want to observe you system/scripts (e.g. after a bigger change), just create an additional logger instance with the level **Warn** or **Debug** and keep these files for 7 days on a separate disk.
 
 You could also use the [NLog](http://nlog-project.org/) **WebServiceTarget** for the level **Error** or **Fatal**, this can call any Web-Service or Web-Hook with *HttpGet* or *HttpPost*. I also tried *JsonPost* with some Web-Hooks and it worked just fine.
 
-There is Proxy support by the .Net components of [NLog](http://nlog-project.org/), I never testet it.
+There is Proxy support by the .Net components of [NLog](http://nlog-project.org/), I never tested it.
 
 _Please keep in mind:_
 
-**PSNLog** and [NLog](http://nlog-project.org/) are not created as a monitoring system or for observation purposes! It's a logging component, not more.
+**PSNLog** and [NLog](http://nlog-project.org/) are not created as a monitoring system or for native observation purposes! It's a logging component, not more.
 
 If you want a real Monitoring that can observe your logs, **PSNLog** and [NLog](http://nlog-project.org/) can help you to establish that. But you should monitor the Logs with something like [NXLog](https://nxlog.co) and establish a central logging instance, like [Graylog](https://www.graylog.org) or [Azure Monitor](https://azure.microsoft.com/en-us/services/monitor/) (Azure Log Analytics). Other vendors also have great solutions in that area.
 
@@ -218,9 +246,3 @@ Please see the [NLog Wiki](https://github.com/nlog/nlog/wiki/WebService-target) 
 
 * Please read our [LICENSE](LICENSE.md) file (Should come with the distribution or in out GitHub repository)
 
-<!--
-## Contact
-
-* Twitter: [@Maik_Koster](https://twitter.com/Maik_Koster)
-* Blog: [MaikKoster.com](http://MaikKoster.com/)
--->
