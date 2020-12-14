@@ -4,13 +4,13 @@
     RootModule = 'PSNLog.psm1'
 
     # Version number of this module.
-    ModuleVersion = '0.2.5'
+    ModuleVersion = '0.3.0'
 
     # ID used to uniquely identify this module
-    GUID = 'fe52b5c2-b2f8-4804-87c6-8606410b8f7d'
+    GUID = 'ff0a6f42-b535-47c5-8df8-f9adb9371198'
 
     # Author of this module
-    Author = 'Maik Koster'
+    Author = 'Joerg Hochwald'
 
     # Company or vendor of this module
     CompanyName = ''
@@ -86,10 +86,10 @@
                 Tags = 'PowerShell','Logging','NLog'
 
                 # A URL to the license for this module.
-                LicenseUri = 'https://github.com/MaikKoster/PSNLog/blob/master/LICENSE'
+                LicenseUri = 'https://github.com/jhochwald/PSNLog/blob/master/LICENSE'
 
                 # A URL to the main website for this project.
-                ProjectUri = 'https://github.com/MaikKoster/PSNLog'
+                ProjectUri = 'https://github.com/jhochwald/PSNLog'
 
                 # A URL to an icon representing this module.
                 # IconUri = ''
@@ -103,5 +103,5 @@
     }
 
     # HelpInfo URI of this module
-    HelpInfoURI = 'http://github.com/MaikKoster/PSNLog/blob/master/PSNLog/en-US/'
+    HelpInfoURI = 'http://github.com/jhochwald/PSNLog/blob/master/PSNLog/en-US/'
 }

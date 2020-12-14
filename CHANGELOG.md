@@ -1,4 +1,27 @@
-﻿# PSNLog Module Release History
+# PSNLog Module Release History
+
+## [0.3.0] - Unreleased
+
+Started a fork of "PSNLog" Version 0.2.5, a Wrapper for NLog to easily use NLog logging capabilities in PowerShell, by Maik Koster.
+
+### Added
+
+- Output, Info
+
+### Changed
+
+- Header of all Files
+- Syntax
+- Document the parameters
+
+### Fixed
+
+- a few minor glitches
+- Add missing parameter descriptions
+
+---
+
+This is from the original Repository: [https://github.com/MaikKoster/PSNLog](https://github.com/MaikKoster/PSNLog)
 
 ## [0.2.5] - Unreleased
 
@@ -54,4 +77,3 @@ Initial public release, supporting the following actions:
 - Read and apply config file
 - Support SimpleConfiguration
 - Redirect existing Write-Verbose, Write-Warning, Write-Error calls
-
