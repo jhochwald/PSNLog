@@ -81,7 +81,7 @@ function Enable-NLogLogging
 		[ValidateSet('Debug', 'Error', 'Fatal', 'Info', 'Off', 'Trace', 'Warn')]
 		[Alias('MinLevel')]
 		[string]
-		$MinimumLevel = 'Debug',
+		$MinimumLevel = 'Info',
 		[Parameter(ParameterSetName = 'ByFilename')]
 		[string]
 		$Layout = '${cmtrace}',
