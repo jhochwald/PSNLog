@@ -111,7 +111,7 @@ While using **Write-Verbose**, **Write-Host**, **Write-Warning** and **Write-Err
 So lets log to a custom log file and enable daily archiving of this log file
 
 ```powershell
-$paramNewNLogFileTarget = @{	Name 							= 'MyFileTArget'	Filename 						= 'C:\scripts\PowerShell\logs\MyLogFile.log'	ArchiveFileName 				= 'C:\scripts\PowerShell\logs\archive\MyLog.{#}.log'	ArchiveNumbering 				= 'Date'	ArchiveEvery 					= 'Day'	MaxArchiveFiles 				= 14	ArchiveDateFormat			  	= 'yyyyMMdd'	EnableArchiveFileCompression	= $true}$Target = New-NLogFileTarget @paramNewNLogFileTarget
+$paramNewNLogFileTarget = @{	Name = 'MyFileTArget'	Filename = 'C:\scripts\PowerShell\logs\MyLogFile.log'	ArchiveFileName = 'C:\scripts\PowerShell\logs\archive\MyLog.{#}.log'	ArchiveNumbering = 'Date'	ArchiveEvery = 'Day'	MaxArchiveFiles = 14	ArchiveDateFormat = 'yyyyMMdd'	EnableArchiveFileCompression = $true}$Target = New-NLogFileTarget @paramNewNLogFileTarget
 Enable-NLogLogging -Target $Target -DontRedirectMessages
 ```
 
