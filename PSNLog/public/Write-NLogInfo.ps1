@@ -1,4 +1,4 @@
-﻿function Write-NLogInfo
+function Write-NLogInfo
 {
 	<#
          .SYNOPSIS

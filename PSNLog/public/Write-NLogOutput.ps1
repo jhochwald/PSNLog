@@ -1,4 +1,4 @@
-﻿function Write-NLogOutput
+function Write-NLogOutput
 {
 	<#
          .SYNOPSIS

@@ -1,4 +1,4 @@
-﻿function Write-NLogDebug
+function Write-NLogDebug
 {
 	<#
          .SYNOPSIS
