@@ -1,7 +1,7 @@
 ---
 external help file: PSNLog-help.xml
 Module Name: PSNLog
-online version:
+online version: https://github.com/jhochwald/PSNLog
 schema: 2.0.0
 ---
 
@@ -76,6 +76,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 Inspired by PSNLog, a Wrapper for NLog to easily use NLog logging capabilities in PowerShell, by Maik Koster
 
 ## RELATED LINKS
+
+[https://github.com/jhochwald/PSNLog](https://github.com/jhochwald/PSNLog)
 
 [Write-Information]()
 

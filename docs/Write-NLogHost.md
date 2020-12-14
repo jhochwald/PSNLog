@@ -1,7 +1,7 @@
 ---
 external help file: PSNLog-help.xml
 Module Name: PSNLog
-online version: https://github.com/MaikKoster/PSNLog
+online version: https://github.com/jhochwald/PSNLog
 schema: 2.0.0
 ---
 
@@ -162,6 +162,8 @@ All rights reserved.
 License: BSD 3-Clause "New" or "Revised" License
 
 ## RELATED LINKS
+
+[https://github.com/jhochwald/PSNLog](https://github.com/jhochwald/PSNLog)
 
 [https://github.com/MaikKoster/PSNLog](https://github.com/MaikKoster/PSNLog)
 
