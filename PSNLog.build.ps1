@@ -328,9 +328,11 @@ Task CreateModulePSM1 {
 	If (Test-Path($LicensePath))
  {
 		Write-Output '      Add License'
-		$CombineFiles += (Get-Content -Path "$LicensePath" | ForEach-Object {
+		<#
+			$CombineFiles += (Get-Content -Path "$LicensePath" | ForEach-Object {
 				"# $_`r`n"
 			})
+		#>
 	}
 
 	$PublicPath = Join-Path -Path $ScratchPath -ChildPath $PublicFunctionSource
@@ -403,8 +405,8 @@ Task UpdateCBH -Before CreateModulePSM1 {
 	Get-ChildItem -Path "$($ScratchPath)\$($PublicFunctionSource)\*.ps1" -File | ForEach-Object {
 		$FormattedOutFile = $_.FullName
 		Write-Output "      Replace CBH in file: $($FormattedOutFile)"
-		$UpdatedFile = (Get-Content  $FormattedOutFile -Raw) -Replace $CBHPattern, $ExternalHelp
-		$UpdatedFile | Out-File -FilePath $FormattedOutFile -Force -Encoding:utf8
+		#$UpdatedFile = (Get-Content  $FormattedOutFile -Raw) -Replace $CBHPattern, $ExternalHelp
+		#$UpdatedFile | Out-File -FilePath $FormattedOutFile -Force -Encoding:utf8
 	}
 }
 
