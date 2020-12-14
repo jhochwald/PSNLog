@@ -12,8 +12,9 @@ Proper logging is a common requirement within most PowerShell scripts and module
 
 This Module allows to use all the capabilities and the flexibility of NLog with as little as two lines of PowerShell.
 
-(c) 2018 Maik Koster. All rights reserved.
 (c) 2020 Joerg Hochwald
+
+(c) 2018 Maik Koster. All rights reserved.
 
 ## Requirements
 
