@@ -99,7 +99,7 @@ Aliases: MinLevel
 
 Required: False
 Position: Named
-Default value: Debug
+Default value: Info
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
