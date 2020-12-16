@@ -244,5 +244,5 @@ Please see the [NLog Wiki](https://github.com/nlog/nlog/wiki/WebService-target) 
 
 ## License
 
-* Please read our [LICENSE](LICENSE.md) file (Should come with the distribution or in out GitHub repository)
+* Please read our [LICENSE](LICENSE) file (Should come with the distribution or in out GitHub repository)
 
