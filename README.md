@@ -69,7 +69,7 @@ The easiest and quickest way to make use of this requires two easy steps
 1. Import the Module
 2. Create a simple configuration for [NLog](http://nlog-project.org/) and redirect native functions.
 
-```powershell
+```console
 Import-Module PSNlog
 Enable-NLogLogging
 ```
@@ -99,7 +99,7 @@ Please see the [NLog Wiki](https://github.com/NLog/NLog/wiki/Configuration-file#
 
 You can now test the behavior by calling
 
-```powershell
+```console
 Write-Debug ("Some debug message")
 Write-Information ("Some info message")
 Write-Warning ("Some warn message")
@@ -132,14 +132,14 @@ The Cmdlets will still write proper output as they are supposed to. If you now c
 
 In case you might want to write to a different location, you can also specify the exact filename or even use other [Layout Renderer](https://github.com/nlog/nlog/wiki/Layout-Renderers) from [NLog](http://nlog-project.org/). E.g. to write every log level to a different file, you could use the following
 
-```powershell
+```console
 Import-Module PSNlog
 Enable-NLogLogging -FileName '${env:temp}/${level}.log'
 ```
 
 or you might want to use a different layout. E.g. the one used on default by NLog:
 
-```powershell
+```console
 Enable-NLogLogging -FileName '${env:scriptroot}/${level}.log' -Layout '${longdate}|${level:uppercase=true}|${logger}|${message}'
 ```
 
@@ -151,7 +151,7 @@ While using **Write-Verbose**, **Write-Host**, **Write-Warning** and **Write-Err
 
 So lets log to a custom log file and enable daily archiving of this log file
 
-```powershell
+```console
 $paramNewNLogFileTarget = @{
 	Name = 'MyFileTArget'
 	Filename = 'C:\scripts\PowerShell\logs\MyLogFile.log'
@@ -170,7 +170,7 @@ In this example all Log-files are rolled-over daily, all older files are compres
 
 Then write log messages as following
 
-```powershell
+```console
 $Logger = Get-NLogLogger
 
 $Logger.Debug("Some debug message")
@@ -193,7 +193,7 @@ The output will look like this:
 
 Another example with a different logging layout:
 
-```powershell
+```console
 $Target = New-NLogTarget -Name 'Warnings' -FileTarget
 $Target.Filename = 'C:\scripts\PowerShell\logs\MyLogging.log'
 $Target.CreateDirs = $true
