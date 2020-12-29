@@ -69,7 +69,7 @@ The easiest and quickest way to make use of this requires two easy steps
 1. Import the Module
 2. Create a simple configuration for [NLog](http://nlog-project.org/) and redirect native functions.
 
-```console
+```powershell
 Import-Module PSNlog
 Enable-NLogLogging
 ```
@@ -99,7 +99,7 @@ Please see the [NLog Wiki](https://github.com/NLog/NLog/wiki/Configuration-file#
 
 You can now test the behavior by calling
 
-```console
+```powershell
 Write-Debug ("Some debug message")
 Write-Information ("Some info message")
 Write-Warning ("Some warn message")
@@ -109,7 +109,7 @@ Write-Error ("Some error message")
 
 The output will look like this:
 
-```
+```console
 2020-12-14 11:43:44.7900|DEBUG|<ScriptBlock>|Some debug message
 2020-12-14 11:43:44.8520|INFO|<ScriptBlock>|Some info message
 2020-12-14 11:43:44.8989|WARN|<ScriptBlock>|Some warn message
@@ -119,7 +119,7 @@ The output will look like this:
 
 If you decide to execute a script (in this example the script name is `nlogger.ps1`), the name of the script is also logged:
 
-```
+```console
 2020-12-14 11:42:42.9662|DEBUG|nlogger.ps1|Some debug message
 2020-12-14 11:42:43.0123|INFO|nlogger.ps1|Some info message
 2020-12-14 11:42:43.0281|WARN|nlogger.ps1|Some warn message
@@ -132,14 +132,14 @@ The Cmdlets will still write proper output as they are supposed to. If you now c
 
 In case you might want to write to a different location, you can also specify the exact filename or even use other [Layout Renderer](https://github.com/nlog/nlog/wiki/Layout-Renderers) from [NLog](http://nlog-project.org/). E.g. to write every log level to a different file, you could use the following
 
-```console
+```powershell
 Import-Module PSNlog
 Enable-NLogLogging -FileName '${env:temp}/${level}.log'
 ```
 
 or you might want to use a different layout. E.g. the one used on default by NLog:
 
-```console
+```powershell
 Enable-NLogLogging -FileName '${env:scriptroot}/${level}.log' -Layout '${longdate}|${level:uppercase=true}|${logger}|${message}'
 ```
 
@@ -151,7 +151,7 @@ While using **Write-Verbose**, **Write-Host**, **Write-Warning** and **Write-Err
 
 So lets log to a custom log file and enable daily archiving of this log file
 
-```console
+```powershell
 $paramNewNLogFileTarget = @{
 	Name = 'MyFileTArget'
 	Filename = 'C:\scripts\PowerShell\logs\MyLogFile.log'
@@ -170,7 +170,7 @@ In this example all Log-files are rolled-over daily, all older files are compres
 
 Then write log messages as following
 
-```console
+```powershell
 $Logger = Get-NLogLogger
 
 $Logger.Debug("Some debug message")
@@ -183,7 +183,7 @@ $Logger.Trace("Some trace message")
 
 The output will look like this:
 
-```
+```console
 2020-12-14 11:48:16.0241|DEBUG||Some debug message
 2020-12-14 11:48:16.0710|INFO||Some info message
 2020-12-14 11:48:16.1022|WARN||Some warn message
@@ -193,7 +193,7 @@ The output will look like this:
 
 Another example with a different logging layout:
 
-```console
+```powershell
 $Target = New-NLogTarget -Name 'Warnings' -FileTarget
 $Target.Filename = 'C:\scripts\PowerShell\logs\MyLogging.log'
 $Target.CreateDirs = $true
@@ -202,7 +202,7 @@ Enable-NLogLogging -FileName 'C:\scripts\PowerShell\logs\MyLogging.log' -MinLeve
 
 The output will look like this, in this case the script `nlogger.ps1` was called on the computer with the name **HAL-9000**:
 
-```
+```console
 2020-12-14 15:10:37.4358 | HAL-9000 | powershell (1912) | INFO | nlogger.ps1 | Some info message
 2020-12-14 15:10:37.4358 | HAL-9000 | powershell (1912) | WARN | nlogger.ps1 | Some warn message
 2020-12-14 15:10:37.4529 | HAL-9000 | powershell (1912) | INFO | nlogger.ps1 | Some Console message
@@ -213,7 +213,7 @@ PowerShell had the PID 1912 in this example above! Add the Hostname to the loggi
 
 The same example with PowerShell Core, in this case Version 7.1.0):
 
-```
+```console
 2020-12-14 15:18:56.2251 | HAL-9000 | pwsh (1208) | INFO | nlogger.ps1 | Some info message
 2020-12-14 15:18:56.2539 | HAL-9000 | pwsh (1208) | WARN | nlogger.ps1 | Some warn message
 2020-12-14 15:18:56.2633 | HAL-9000 | pwsh (1208) | INFO | nlogger.ps1 | Some Console message
